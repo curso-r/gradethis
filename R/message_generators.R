@@ -10,7 +10,8 @@ extra_answer <- function(this_line) {
     list(
       this_line = prep(this_line)
     ),
-    "I didn't expect the call {this_line} in your answer. Please remove it and resubmit your work."
+    phares("PT-BR")$extra_answer_text
+    #"I didn't expect the call {this_line} in your answer. Please remove it and resubmit your work."
   )
 
 }
@@ -20,7 +21,8 @@ missing_answer <- function(this_prior_line) {
     list(
       this_prior_line = prep(this_prior_line)
     ),
-    "I expected another call after {this_prior_line}. Did you forget to write one?"
+    phares("PT-BR")$missing_answer_text
+    #"I expected another call after {this_prior_line}. Did you forget to write one?"
   )
 }
 
@@ -60,10 +62,11 @@ bad_argument_name <- function(this_call,
       this_name = this_name,
       this = this
     ),
-    "{intro}{this_call} accepts more than one argument name that begins ",
-    "with `{this_name}`. As a result, R cannot figure out which ",
-    "argument you want to pass {this} to. Check how you spelled ",
-    "`{this_name}`, or write out the full argument name."
+    phares("PT-BR")$bad_argument_name_text
+    #"{intro}{this_call} accepts more than one argument name that begins ",
+    #"with `{this_name}`. As a result, R cannot figure out which ",
+    #"argument you want to pass {this} to. Check how you spelled ",
+    #"`{this_name}`, or write out the full argument name."
   )
 }
 
@@ -93,9 +96,10 @@ duplicate_name <- function(this_call,
       this_call = this_call,
       this_name = this_name
     ),
-    "You passed multiple arguments named {this_name} ",
-    "to {this_call}, which will cause an error. ",
-    "Check your spelling, or remove one of the arguments."
+    phares("PT-BR")$duplicate_name_text
+    #"You passed multiple arguments named {this_name} ",
+    #"to {this_call}, which will cause an error. ",
+    #"Check your spelling, or remove one of the arguments."
   )
 }
 
@@ -135,9 +139,10 @@ missing_argument <- function(this_call,
       this_call = this_call,
       that_name = that_name
     ),
-    "{intro}{your_char}our call to {this_call} should include {that_name} ",
-    "You may have misspelled an argument name, ",
-    "or left out an important argument."
+    phrases("PT-BR")$missing_answer_text
+    #"{intro}{your_char}our call to {this_call} should include {that_name} ",
+    #"You may have misspelled an argument name, ",
+    #"or left out an important argument."
   )
 }
 
@@ -176,11 +181,7 @@ surplus_argument <- function(this_call,
       this = this,
       this_call = this_call
     ),
-    "{intro}I did not expect your call to {this_call} to ",
-    "include {this}. You ",
-    "may have included an unnecessary argument, or you ",
-    "may have left out or misspelled an important ",
-    "argument name."
+    phrases("PT-BR")$surplus_text
   )
 }
 
@@ -221,22 +222,15 @@ pmatches_argument_name <- function(this_call,
     correct_name <- purrr::map2(correct_name, this, md_code_prepend)
   }
 
-  intro  <- "This code seems correct, but please write using full argument(s) names:\n\n"
-  msg <- glue::glue_data(
+  glue::glue_data(
     list(
       this = this_user,
       correct_name = correct_name,
       this_call = this_call
     ),
-    "- Where you wrote {this}, please use the full formal name {correct_name}."
-  )
-
-  glue::glue_data(
-    list(
-      intro = intro,
-      msg = msg
-    ),
-    "{intro}{paste0(msg, collapse = '\n')}"
+    phrases("PT-BR")$pmatches_argument_name_text
+    #"This code seems correct, but please write using full argument(s) names:\n\n",
+    #"{paste0('- Where you wrote {this}, please use the full formal name {correct_name}.', collapse = '\n')}"
   )
 }
 
@@ -271,10 +265,11 @@ too_many_matches <- function(this_call,
       this_call = this_call,
       that_name = that_name
     ),
-    "{intro}{this_call} accepts an argument named {that_name}. ",
-    "More than one of your argument names in {this_call} will ",
-    "be matched to {that_name}, which will cause an error. Try ",
-    "writing out the full argument names."
+    phrases("PT-BR")$too_many_matches_text
+    #"{intro}{this_call} accepts an argument named {that_name}. ",
+    #"More than one of your argument names in {this_call} will ",
+    #"be matched to {that_name}, which will cause an error. Try ",
+    #"writing out the full argument names."
   )
 }
 
@@ -315,7 +310,8 @@ wrong_call <- function(this,
       that = that,
       action = action
     ),
-    "{intro}I expected you to {action} {that} where you called {this}."
+    phrases("PT-BR")$wrong_call_text
+    #"{intro}I expected you to {action} {that} where you called {this}."
   )
 }
 
@@ -336,14 +332,14 @@ wrong_value <- function(this,
 
   intro <- build_intro(.call = enclosing_call)
 
-  expected <- "expected"
+  expected <- phrases("PT-BR")$expected
   if (length(this) > length(that)) {
-    expected <- "didn't expect"
+    expected <- phrases("PT-BR")$unexpected
     that <- this
     this <- NULL
   }
   
-  where <- " where you wrote "
+  where <- phrases("PT-BR")$wrong_value
   
   that_original <- that
   that <- prep(that)
@@ -365,9 +361,9 @@ wrong_value <- function(this,
   # solution than tacking on more greps.
   action <- 
     if (is_infix_assign(that_original)) {
-      "you to assign something to something else with "
+      phrases("PT-BR")$action1
     } else if (grepl("\\(\\)", that)) {
-      "you to call "
+      phrases("PT-BR")$action2
     }
 
   glue::glue_data(
@@ -379,7 +375,8 @@ wrong_value <- function(this,
       this = this,
       action = action %||% ""
     ),
-    "{intro}I {expected} {action}{that}{where}{this}."
+    phrases("PT-BR")$wrong_value$text
+    #"{intro}I {expected} {action}{that}{where}{this}."
   )
 }
 
