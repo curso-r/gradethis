@@ -181,10 +181,10 @@ gradethis_setup <- function(
 gradethis_default_options <- list(
   
   # Default message for pass(message)
-  pass = "{random_praise()} Correct!",
+  pass = "{random_praise()} Correto!",
   pass.praise = FALSE,
   # Default message for fail(message)
-  fail = "Incorrect.{maybe_code_feedback()} {random_encouragement()}",
+  fail = "Incorreto.{maybe_code_feedback()} {random_encouragement()}",
   fail.hint = FALSE,
   fail.encourage = FALSE,
   
@@ -199,16 +199,16 @@ gradethis_default_options <- list(
   code_incorrect = "{pipe_warning()}{code_feedback()} {random_encouragement()}",
   # Default message used for pipe_warning()
   pipe_warning = paste0(
-    "I see that you are using pipe operators (e.g. %>%), ",
-    "so I want to let you know that this is how I am interpretting your code ",
-    "before I check it:\n\n```r\n{.user_code_unpiped}\n```\n\n"
+    "Vejo que você está usando pipes (e.g. %>%), ",
+    "por isso quero te dizer que é assim que estou interpretando o seu código ",
+    "antes de checá-lo:\n\n```r\n{.user_code_unpiped}\n```\n\n"
   ),
   
   # Default value for grade_this_code(allow_partial_matching)
   allow_partial_matching = NULL,
   
   # Default error checker message
-  error_checker.message = "An error occurred with your R code:\n\n```\n{.error$message}\n```\n\n\n"
+  error_checker.message = "Um erro aconteceu no seu código:\n\n```\n{.error$message}\n```\n\n\n"
 )
 
 # Legacy Options ----------------------------------------------------------

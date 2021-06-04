@@ -1,5 +1,5 @@
 Type: Package
-Package: gradethis
+Package: gradethisBR
 Title: Automated Feedback for Student Exercises in 'learnr'
     Tutorials
 Version: 0.2.3.9001

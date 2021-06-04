@@ -246,7 +246,7 @@ pass <- function(
 #'
 #' @export
 fail <- function(
-  message = getOption("gradethis.fail", "Incorrect"),
+  message = getOption("gradethis.fail", "Incorreto"),
   ...,
   env = parent.frame(),
   hint = getOption("gradethis.fail.hint", FALSE),
@@ -354,7 +354,7 @@ pass_if_equal <- function(
 #' @export
 fail_if_equal <- function(
   y,
-  message = getOption("gradethis.fail", "Incorrect"),
+  message = getOption("gradethis.fail", "Incorreto"),
   x = .result,
   ...,
   env = parent.frame(),

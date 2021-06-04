@@ -10,7 +10,7 @@ extra_answer <- function(this_line) {
     list(
       this_line = prep(this_line)
     ),
-    phares("PT-BR")$extra_answer_text
+    phrases("PT-BR")$extra_answer_text
     #"I didn't expect the call {this_line} in your answer. Please remove it and resubmit your work."
   )
 
@@ -21,13 +21,10 @@ missing_answer <- function(this_prior_line) {
     list(
       this_prior_line = prep(this_prior_line)
     ),
-    phares("PT-BR")$missing_answer_text
+    phrases("PT-BR")$missing_answer_text
     #"I expected another call after {this_prior_line}. Did you forget to write one?"
   )
 }
-
-
-
 
 # bad argument name
 bad_argument_name <- function(this_call,
@@ -62,7 +59,7 @@ bad_argument_name <- function(this_call,
       this_name = this_name,
       this = this
     ),
-    phares("PT-BR")$bad_argument_name_text
+    phrases("PT-BR")$bad_argument_name_text
     #"{intro}{this_call} accepts more than one argument name that begins ",
     #"with `{this_name}`. As a result, R cannot figure out which ",
     #"argument you want to pass {this} to. Check how you spelled ",
@@ -96,7 +93,7 @@ duplicate_name <- function(this_call,
       this_call = this_call,
       this_name = this_name
     ),
-    phares("PT-BR")$duplicate_name_text
+    phrases("PT-BR")$duplicate_name_text
     #"You passed multiple arguments named {this_name} ",
     #"to {this_call}, which will cause an error. ",
     #"Check your spelling, or remove one of the arguments."
@@ -139,7 +136,7 @@ missing_argument <- function(this_call,
       this_call = this_call,
       that_name = that_name
     ),
-    phrases("PT-BR")$missing_answer_text
+    phrases("PT-BR")$missing_argument_text
     #"{intro}{your_char}our call to {this_call} should include {that_name} ",
     #"You may have misspelled an argument name, ",
     #"or left out an important argument."
@@ -299,9 +296,9 @@ wrong_call <- function(this,
   
   action <- 
     if (is_infix_assign(that_original)) {
-      "assign something to something else with"
+      phrases("PT-BR")$wrong_call_text$action1
     } else {
-      "call"
+      phrases("PT-BR")$wrong_call_text$action2
     }
 
   glue::glue_data(
@@ -310,7 +307,7 @@ wrong_call <- function(this,
       that = that,
       action = action
     ),
-    phrases("PT-BR")$wrong_call_text
+    phrases("PT-BR")$wrong_call_text$text
     #"{intro}I expected you to {action} {that} where you called {this}."
   )
 }
@@ -339,7 +336,7 @@ wrong_value <- function(this,
     this <- NULL
   }
   
-  where <- phrases("PT-BR")$wrong_value
+  where <- phrases("PT-BR")$wrong_value$where
   
   that_original <- that
   that <- prep(that)
@@ -361,9 +358,9 @@ wrong_value <- function(this,
   # solution than tacking on more greps.
   action <- 
     if (is_infix_assign(that_original)) {
-      phrases("PT-BR")$action1
+      phrases("PT-BR")$wrong_value$action1
     } else if (grepl("\\(\\)", that)) {
-      phrases("PT-BR")$action2
+      phrases("PT-BR")$wrong_value$action2
     }
 
   glue::glue_data(
@@ -395,7 +392,7 @@ prep <- function(text) {
   paste0("`", deparse_to_string(text), "`")
 }
 
-build_intro <- function(.call = NULL, .arg = NULL, .open = "In ", .close = ", ") {
+build_intro <- function(.call = NULL, .arg = NULL, .open = phrases("PT-BR")$intro_in_text, .close = ", ") {
   is_call_fn_def <- is_function_definition(.call)
 
   if(!is.null(.call)) {

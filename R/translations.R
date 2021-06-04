@@ -45,6 +45,7 @@ phrases <- function(language = "EN"){
     )
   } else if(language == "PT-BR"){
     list(
+      intro_in_text = "Em ",
       extra_answer_text = "Eu não esperava que você usasse {this_line} na sua resposta. Remova essa parte e entregue novamente a sua solução.",
       missing_answer_text = "Eu esperava mais uma parte depois de {this_prior_line}. Você esqueceu de continuar?",
       bad_argument_name_text = stringr::str_c("{intro}{this_call} aceita mais de um argumento que começa ",

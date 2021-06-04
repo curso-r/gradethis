@@ -176,8 +176,8 @@ check_exercise <- function(
   # make sure the result is a pass or fail
   if (!is_graded(graded_result)) {
     message(
-      "`", check_label, "` chunk did not mark an answer as correct or incorrect.",
-      "Consider adding a `pass()` or `fail()` at the end of your `", check_label, "` code"
+      "`", check_label, "` não marcou uma mensagem como correta ou incorreta.",
+      "Considere adicionar um `pass()` ou `fail()` no final do seu código `", check_label, "`"
     )
     return(feedback_grading_problem())
   }
