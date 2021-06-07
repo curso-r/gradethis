@@ -125,9 +125,9 @@ missing_argument <- function(this_call,
   that_name <- prep(that_name)
 
   if (grepl("\\(\\)", that_name)) {
-    that_name <- paste0("an argument, possibly unnamed, that calls ", that_name, ".")
+    that_name <- paste0("um argumento, provavelmente não nomeado, que faz uma chamada a ", that_name, ".")
   } else {
-    that_name <- paste(that_name, "as one of its arguments.")
+    that_name <- paste(that_name, "como um de seus argumentos.")
   }
 
   glue::glue_data(

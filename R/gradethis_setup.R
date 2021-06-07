@@ -109,7 +109,7 @@ gradethis_setup <- function(
     # avoids cyclical loading when called by .onLoad(). Even if called as
     # gradethis::gradethis_setup(), .onLoad() is called first, setting the
     # default option values ahead of the current gradethis_setup() call
-    require(gradethis)
+    require(gradethisBR)
   }
   
   
@@ -181,10 +181,10 @@ gradethis_setup <- function(
 gradethis_default_options <- list(
   
   # Default message for pass(message)
-  pass = "{random_praise()} Correto!",
+  pass = "Correto!",
   pass.praise = FALSE,
   # Default message for fail(message)
-  fail = "Incorreto.{maybe_code_feedback()} {random_encouragement()}",
+  fail = "Incorreto.{maybe_code_feedback()}",
   fail.hint = FALSE,
   fail.encourage = FALSE,
   
@@ -196,7 +196,7 @@ gradethis_default_options <- list(
   # Default message for grade_this_code(correct)
   code_correct = NULL,
   # Default message for grade_this_code(incorrect)
-  code_incorrect = "{pipe_warning()}{code_feedback()} {random_encouragement()}",
+  code_incorrect = "{pipe_warning()}{code_feedback()}",
   # Default message used for pipe_warning()
   pipe_warning = paste0(
     "Vejo que você está usando pipes (e.g. %>%), ",
@@ -215,12 +215,12 @@ gradethis_default_options <- list(
 
 gradethis_legacy_options <- list(
   ### legacy ###
-  glue_correct = "{random_praise()} {.message} {.correct}",
-  glue_incorrect = "{pipe_warning()}{.message} {.incorrect} {random_encouragement()}",
+  glue_correct = "{.message} {.correct}",
+  glue_incorrect = "{pipe_warning()}{.message} {.incorrect}",
   
   
-  glue_correct_test = "{.num_correct}/{.num_total} correct! {random_praise()}",
-  glue_incorrect_test = "{.num_correct}/{.num_total} correct! {random_encouragement()}"
+  glue_correct_test = "{.num_correct}/{.num_total} correct!",
+  glue_incorrect_test = "{.num_correct}/{.num_total} correct!"
 )
 
 names(gradethis_legacy_options) <- paste0(
